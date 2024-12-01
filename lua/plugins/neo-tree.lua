@@ -21,5 +21,7 @@ return {
         },
       },
     },
+    close_if_last_window = true,
+    auto_clean_after_session_restore = true,
   },
 }

@@ -22,3 +22,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     copy_to_unnamed(vim.v.event.regcontents)
   end,
 })
+
+-- Fix the problem when reloading session with neotree open
+vim.api.nvim_create_autocmd('VimLeavePre', {
+  callback = function()
+    require('neo-tree.command').execute { action = 'close' }
+  end,
+})
