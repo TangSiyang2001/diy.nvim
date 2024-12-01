@@ -1,6 +1,6 @@
 return { -- Fuzzy Finder (files, lsp, etc)
   'nvim-telescope/telescope.nvim',
-  event = 'VimEnter',
+  -- event = 'VimEnter',
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
@@ -21,6 +21,21 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- Useful for getting pretty icons, but requires a Nerd Font.
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+  },
+  keys = { -- load when meeting keys below
+    { '<leader>sh', desc = '[S]earch [H]elp' },
+    { '<leader>sk', desc = '[S]earch [K]eymaps' },
+    { '<leader>sf', desc = '[S]earch [F]iles' },
+    { '<leader>ss', desc = '[S]earch [S]elect Telescope' },
+    { '<leader>sw', desc = '[S]earch current [W]ord' },
+    { '<leader>sg', desc = '[S]earch by [G]rep' },
+    { '<leader>sd', desc = '[S]earch [D]iagnostics' },
+    { '<leader>sr', desc = '[S]earch [R]esume' },
+    { '<leader>s.', desc = '[S]earch Recent Files ("." for repeat)' },
+    { '<leader><leader>', desc = '[ ] Find existing buffers' },
+    { '<leader>/', desc = '[/] Fuzzily search in current buffer' },
+    { '<leader>s/', desc = '[S]earch [/] in Open Files' },
+    { '<leader>sn', desc = '[S]earch [N]eovim files' },
   },
   config = function()
     -- Telescope is a fuzzy finder that comes with a lot of different things that

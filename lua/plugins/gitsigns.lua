@@ -3,6 +3,25 @@
 
 return {
   'lewis6991/gitsigns.nvim',
+  keys = {
+    { ']h', desc = 'Next Hunk' },
+    { '[h', desc = 'Prev Hunk' },
+    { ']H', desc = 'Last Hunk' },
+    { '[', desc = 'First Hunk' },
+    { '<leader>ghs', desc = ':Gitsigns stage_hunk<CR>', 'Stage Hunk' },
+    { '<leader>ghr', desc = ':Gitsigns reset_hunk<CR>', 'Reset Hunk' },
+    { '<leader>gS', desc = 'Stage Buffer' },
+    { '<leader>gu', desc = 'Undo Stage Hunk' },
+    { '<leader>gR', desc = 'Reset Buffer' },
+    { '<leader>gp', desc = 'Preview Hunk Inline' },
+    { '<leader>gb', desc = 'Blame Line' },
+    { '<leader>gB', desc = 'Blame Buffer' },
+    { '<leader>gd', desc = 'Diff This' },
+    { '<leader>gD', desc = 'Diff This ~' },
+    { 'ih', desc = ':<C-U>Gitsigns select_hunk<CR>', 'GitSigns Select Hunk' },
+    { '<leader>tb', desc = '[T]oggle git show [b]lame line' },
+    { '<leader>tD', desc = '[T]oggle git show [D]eleted' },
+  },
   opts = {
     signs = {
       add = { text = '▎' },
