@@ -55,6 +55,15 @@ return {
       completeUnimported = true,
       clangdFileStatus = true,
     },
+    -- server specific callback for lsp attach
+    on_attach = function(attach_event)
+      local map = function(keys, func, desc, mode)
+        mode = mode or 'n'
+        vim.keymap.set(mode, keys, func, { buffer = attach_event.buf, desc = 'LSP: ' .. desc })
+      end
+      map('<leader>ch', '<cmd>ClangdSwitchSourceHeader<CR>', 'Switch Source/Header (C/C++)')
+      map('gY', require('clangd_extensions.type_hierarchy').show_hierarchy, 'Show Type Hierachy (C/C++)')
+    end,
   },
   -- gopls = {},
   -- pyright = {},

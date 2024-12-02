@@ -155,6 +155,17 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
           end, '[T]oggle Inlay [H]ints')
         end
+
+        -- Invoke lsp attach callbacks for each server if set
+        local bufnr = event.buf
+        local util = require 'lspconfig.util'
+        local servers = require 'plugins.extensions.lsp-servers'
+        for name, server in pairs(servers) do
+          local client_by_name = util.get_active_client_by_name(bufnr, name)
+          if client_by_name and server.on_attach then
+            server.on_attach(event)
+          end
+        end
       end,
     })
 
