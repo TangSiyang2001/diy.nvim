@@ -30,3 +30,11 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+vim.keymap.set('n', '<C-+>', '<C-w>+', { desc = 'Increase window height' })
+vim.keymap.set('n', '<C-=>', '<C-w>+', { desc = 'Increase window height' })
+vim.keymap.set('n', '<C-_>', '<C-w>-', { desc = 'Decrease window height' })
+vim.keymap.set('n', '<C->>', '<C-w>>', { desc = 'Increase window width' })
+vim.keymap.set('n', '<C-.>', '<C-w>>', { desc = 'Increase window width' })
+vim.keymap.set('n', '<C-<>', '<C-w><', { desc = 'Decrease window width' })
+vim.keymap.set('n', '<C-,>', '<C-w><', { desc = 'Decrease window width' })
