@@ -83,6 +83,10 @@ return {
               relative = 'win',
               size = 0.5,
             },
+            auto_refresh = false,
+            -- NOTE: use <c-v> to jump preview vsplit, use <c-s> to jump preview split
+            focus = true,
+            auto_jump = true,
           }
         end
 
