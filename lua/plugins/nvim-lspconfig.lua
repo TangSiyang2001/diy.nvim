@@ -63,34 +63,7 @@ return {
         --  To jump back, press <C-t>.
         map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
-        -- Find references for the word under your cursor.
-        -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-
-        -- use quick fix list rather than telescope for lsp references
-        local lsp_references = function()
-          local trouble = require 'trouble'
-          trouble.toggle {
-            mode = 'lsp_references',
-            win = {
-              type = 'split',
-              relative = 'win',
-              size = 0.3,
-            },
-
-            preview = {
-              type = 'split',
-              position = 'right',
-              relative = 'win',
-              size = 0.5,
-            },
-            auto_refresh = false,
-            -- NOTE: use <c-v> to jump preview vsplit, use <c-s> to jump preview split
-            focus = true,
-            auto_jump = true,
-          }
-        end
-
-        map('gr', lsp_references, '[G]oto [R]eferences')
+        map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.

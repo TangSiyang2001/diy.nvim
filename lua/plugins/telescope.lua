@@ -57,6 +57,33 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- Telescope picker. This is really useful to discover what Telescope can
     -- do as well as how to actually do it!
 
+    local lsp_entry_maker = function(entry)
+      local base_entry = require('telescope.make_entry').gen_from_quickfix()(entry)
+      -- replace the default '|' splitting char between line and text with ':':
+      base_entry.display = function(e)
+        local filename = e.filename or e.text
+        local line = e.lnum
+        local text = e.text
+        return string.format('%s:%d: %s', filename, line, text)
+      end
+      return base_entry
+    end
+
+    local lsp_picker_opts = {
+      layout_strategy = 'vertical',
+
+      layout_config = {
+        width = 0.8,
+        prompt_position = 'top',
+      },
+
+      include_current_line = true,
+      fname_width = 60,
+      path_display = 'smart',
+
+      entry_maker = lsp_entry_maker,
+    }
+
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
     require('telescope').setup {
@@ -69,10 +96,28 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --   },
       -- },
       -- pickers = {}
-      -- defaults = {
-      --   layout_strategy = 'vertical',
-      --   layout_config = { height = 0.95 },
-      -- },
+      defaults = {
+        -- layout_strategy = 'vertical',
+        -- layout_config = { height = 0.95, widthg = 0.5 },
+        path_display = { 'smart' },
+      },
+
+      pickers = {
+        live_grep = {
+          layout_strategy = 'vertical',
+          layout_config = {
+            width = 0.8,
+            prompt_position = 'top',
+          },
+          include_current_line = true,
+          path_display = 'smart',
+        },
+
+        lsp_references = lsp_picker_opts,
+        lsp_definitions = lsp_picker_opts,
+        lsp_implementations = lsp_picker_opts,
+        lsp_type_definitions = lsp_picker_opts,
+      },
       extensions = {
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
