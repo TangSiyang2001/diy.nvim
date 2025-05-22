@@ -4,6 +4,7 @@
 return {
   'nvim-neo-tree/neo-tree.nvim',
   version = '*',
+  lazy = false,
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
@@ -15,9 +16,13 @@ return {
   },
   opts = {
     filesystem = {
+      hijack_netrw_behavior = 'open_current',
       window = {
         mappings = {
           ['\\'] = 'close_window',
+          ['p'] = 'focus_preview',
+          ['<C-u>'] = { 'scroll_preview', config = { direction = 10 } },
+          ['<C-d>'] = { 'scroll_preview', config = { direction = -10 } },
         },
       },
     },
