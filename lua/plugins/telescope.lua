@@ -79,7 +79,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
       include_current_line = true,
       fname_width = 60,
-      path_display = 'smart',
 
       entry_maker = lsp_entry_maker,
     }
@@ -99,7 +98,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
       defaults = {
         -- layout_strategy = 'vertical',
         -- layout_config = { height = 0.95, widthg = 0.5 },
-        path_display = { 'smart' },
       },
 
       pickers = {
@@ -109,8 +107,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
             width = 0.8,
             prompt_position = 'top',
           },
-          include_current_line = true,
-          path_display = 'smart',
         },
 
         lsp_references = lsp_picker_opts,
