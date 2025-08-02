@@ -29,3 +29,11 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
     require('neo-tree.command').execute { action = 'close' }
   end,
 })
+
+vim.api.nvim_create_autocmd('InsertEnter', {
+  command = 'ComfyLineNumbers disable',
+})
+
+vim.api.nvim_create_autocmd('InsertLeave', {
+  command = 'ComfyLineNumbers enable',
+})

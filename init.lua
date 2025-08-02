@@ -191,6 +191,8 @@ require('lazy').setup({
   require 'plugins.autopairs',
 
   require 'plugins.neo-tree',
+
+  require 'plugins.comfy-line-num',
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
