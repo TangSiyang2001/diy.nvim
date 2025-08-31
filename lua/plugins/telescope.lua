@@ -113,6 +113,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
         lsp_definitions = lsp_picker_opts,
         lsp_implementations = lsp_picker_opts,
         lsp_type_definitions = lsp_picker_opts,
+
+        colorscheme = {
+          enable_preview = true,
+        },
       },
       extensions = {
         ['ui-select'] = {
