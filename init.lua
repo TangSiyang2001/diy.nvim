@@ -155,7 +155,7 @@ require('lazy').setup({
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
-  require 'plugins.vim-sleuth',
+  require 'plugins.guess-indent',
   require 'plugins.gitsigns',
   require 'plugins.which-key',
   require 'plugins.telescope',
