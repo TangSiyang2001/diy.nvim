@@ -12,19 +12,19 @@ return {
     keys = {
       { '<leader>ch', '<cmd>ClangdSwitchSourceHeader<CR>', desc = 'Switch Source/Header (C/C++)' },
     },
-    root_dir = function(fname)
-      return require('lspconfig.util').root_pattern(
-        'Makefile',
-        'configure.ac',
-        'configure.in',
-        'config.h.in',
-        'meson.build',
-        'meson_options.txt',
-        'build.ninja'
-      )(fname) or require('lspconfig.util').root_pattern('compile_commands.json', 'compile_flags.txt')(fname) or require('lspconfig.util').find_git_ancestor(
-        fname
-      )
-    end,
+    root_mark = {
+      'compile_commands.json',
+      'compile_flags.txt',
+      'configure.ac', -- AutoTools
+      'Makefile',
+      'configure.ac',
+      'configure.in',
+      'config.h.in',
+      'meson.build',
+      'meson_options.txt',
+      'build.ninja',
+      '.git',
+    },
     capabilities = {
       offsetEncoding = { 'utf-16' },
     },
@@ -56,12 +56,33 @@ return {
       clangdFileStatus = true,
     },
     -- server specific callback for lsp attach
-    on_attach = function(attach_event)
+    on_attach = function(client, bufnr)
+      local function switch_source_header()
+        local method_name = 'textDocument/switchSourceHeader'
+        ---@diagnostic disable-next-line:param-type-mismatch
+        if not client or not client:supports_method(method_name) then
+          return vim.notify(('method %s is not supported by any servers active on the current buffer'):format(method_name))
+        end
+        local params = vim.lsp.util.make_text_document_params(bufnr)
+        ---@diagnostic disable-next-line:param-type-mismatch
+        client:request(method_name, params, function(err, result)
+          if err then
+            error(tostring(err))
+          end
+          if not result then
+            vim.notify 'corresponding file cannot be determined'
+            return
+          end
+          vim.cmd.edit(vim.uri_to_fname(result))
+        end, bufnr)
+      end
+
       local map = function(keys, func, desc, mode)
         mode = mode or 'n'
-        vim.keymap.set(mode, keys, func, { buffer = attach_event.buf, desc = 'LSP: ' .. desc })
+        vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
       end
-      map('<leader>ch', '<cmd>ClangdSwitchSourceHeader<CR>', 'Switch Source/Header (C/C++)')
+
+      map('<leader>ch', switch_source_header, 'Switch Source/Header (C/C++)')
       map('gY', require('clangd_extensions.type_hierarchy').show_hierarchy, 'Show Type Hierachy (C/C++)')
     end,
   },
