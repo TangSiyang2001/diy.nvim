@@ -174,7 +174,7 @@ return {
     local servers = require 'plugins.extensions.lsp-servers'
     local nix_path = os.getenv 'NIX_PATH'
 
-    if nix_path and nix_path ~= '' then
+    if not nix_path or nix_path == '' then
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
